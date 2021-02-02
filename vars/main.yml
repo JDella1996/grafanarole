@@ -1,0 +1,17 @@
+---
+# vars file for grafanarole
+download_dir: "/tmp/grafana"
+
+install_path: "/etc/grafana"
+
+remove_existing_install: false
+
+grafana_log_dir: ""
+proxy_env:
+  https_proxy: ""
+
+email_user: ""
+
+email_password: ""
+
+email_server: ""

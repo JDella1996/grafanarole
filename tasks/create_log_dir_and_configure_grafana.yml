@@ -1,0 +1,19 @@
+---
+- name: Creating Grafana log directories
+  file:
+    path: "{{grafana_log_dir}}"
+    group: grafana
+    owner: grafana
+    recurse: yes
+    state: directory
+  become: true
+
+- name: Applying netdata.conf to all hosts.
+  template:
+      src: "{{role_path}}/templates/grafana.ini.j2"
+      dest: "{{install_path}}/grafana.ini"
+      owner: grafana
+      group: grafana
+      mode: '0755'
+  become: true    
+  notify: Restart Grafana-Server

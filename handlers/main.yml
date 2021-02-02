@@ -1,0 +1,22 @@
+---
+# handlers file for grafanarole
+- name: Starting Grafana-Server
+  service: 
+    name: grafana-server
+    state: started
+    enable: true
+  become: true
+  
+- name: Stop Grafana-Server
+  service: 
+    name: grafana-server
+    state: stopped
+    enable: true
+  become: true
+
+- name: Restart Grafana-Server
+  service: 
+    name: grafana-server
+    state: restarted
+    enable: true
+  become: true

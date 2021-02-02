@@ -1,0 +1,11 @@
+---
+# tasks file for grafanarole
+
+- include_tasks: uninstall_grafana.yml
+  when: remove_existing_install == true
+
+- include_tasks: download_and_install_grafana.yml
+
+- include_tasks: creare_log_dir_and_configure_grafana.yml
+
+

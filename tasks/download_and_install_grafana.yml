@@ -1,0 +1,36 @@
+---     
+- name: Downloading Grafana Installer 
+  get_url: 
+    url: "{{grafana_url}}"
+    dest: "{{download_dir}}"
+  environment: "{{proxy_env}}"
+  register: result
+  become: true
+  
+- name: Change file ownership, group and permissions of Grafana installer
+  file:
+    path: "{{download_dir}}/{{grafanainstaller}}"
+    owner: root
+    group: root
+    mode: '0755'
+  become: true
+
+- name: Installing Grafana 
+  yum:  
+    name: "{{download_dir}}/{{grafanainstaller}}"
+    state: present
+  become: true
+
+- name: Removing Grafana Installer
+  file:
+    path: "{{download_dir}}"
+    state: absent
+  become: true
+
+- name: Enabling Grafana Service
+  ansible.builtin.systemd:
+    name: grafana-server
+    enabled: yes
+    state: started
+    masked: no
+  become: true

@@ -1,0 +1,19 @@
+---
+- name: Stopping Grafana 
+  service:
+    name: grafana-server
+    state: stopped
+    enabled: false
+  become: true
+
+- name: Uninstalling Grafana
+  yum:
+    name: grafana
+    state: absent
+  become: true   
+  
+- name: Deleting Grafana Folder
+  file:
+    path: "{{install_path}}"
+    state: absent
+  become: true
